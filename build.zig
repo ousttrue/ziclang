@@ -14,6 +14,11 @@ pub fn build(b: *std.build.Builder) void {
     const exe = b.addExecutable("ziclang", "src/main.zig");
     exe.setTarget(target);
     exe.setBuildMode(mode);
+
+    exe.linkLibC();
+    exe.addIncludePath("C:/Program Files/LLVM/include");
+    exe.addLibPath("C:/Program Files/LLVM/lib");
+    exe.linkSystemLibrary("libclang");
     exe.install();
 
     const run_cmd = exe.run();
