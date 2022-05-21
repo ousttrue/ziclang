@@ -16,9 +16,15 @@ pub fn build(b: *std.build.Builder) void {
     exe.setBuildMode(mode);
 
     exe.linkLibC();
-    exe.addIncludePath("C:/Program Files/LLVM/include");
-    exe.addLibPath("C:/Program Files/LLVM/lib");
-    exe.linkSystemLibrary("libclang");
+    if (target.os_tag == std.Target.Os.Tag.windows) {
+        exe.addIncludePath("C:/Program Files/LLVM/include");
+        exe.addLibPath("C:/Program Files/LLVM/lib");
+        exe.linkSystemLibrary("libclang");
+    } else {
+        exe.addIncludePath("/usr/lib/llvm/13/include");
+        exe.addLibPath("/usr/lib/llvm/13/lib64");
+        exe.linkSystemLibrary("clang");
+    }
     exe.install();
 
     const run_cmd = exe.run();

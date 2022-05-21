@@ -5,19 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "ziclang",
-            "type": "cppvsdbg",
+            "type": "lldb",
             "request": "launch",
-            "program": "${workspaceFolder}/zig-out/bin/ziclang.exe",
+            "name": "Launch",
+            "program": "${workspaceFolder}/zig-out/bin/ziclang",
             "args": [],
-            "stopAtEntry": false,
-            "environment": [
-                {
-                    "name": "PATH",
-                    "value": "${env:PATH};C:\\Program Files\\LLVM\\bin",
-                }
-            ],
-            "console": "integratedTerminal"
+            "cwd": "${workspaceFolder}"
         },
     ]
 }
