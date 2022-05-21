@@ -16,7 +16,9 @@ pub fn build(b: *std.build.Builder) void {
     exe.setBuildMode(mode);
 
     exe.linkLibC();
-    if (target.os_tag == std.Target.Os.Tag.windows) {
+    std.debug.print("{}\n", .{exe.target_info});    
+
+    if (exe.target_info.target.os.tag == std.Target.Os.Tag.windows) {
         exe.addIncludePath("C:/Program Files/LLVM/include");
         exe.addLibPath("C:/Program Files/LLVM/lib");
         exe.linkSystemLibrary("libclang");

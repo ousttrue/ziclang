@@ -10,7 +10,26 @@
             "name": "Launch",
             "program": "${workspaceFolder}/zig-out/bin/ziclang",
             "args": [],
-            "cwd": "${workspaceFolder}"
+            "env": {
+                "PATH": "$env{PATH};C:\\Program Files\\LLVM\\bin",
+            },
+            "cwd": "${workspaceFolder}",
+        },
+        {
+            "name": "(Windows) 起動",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/zig-out/bin/ziclang",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [
+                {
+                    "name": "PATH",
+                    "value": "$env{PATH};C:\\Program Files\\LLVM\\bin"
+                }
+            ],
+            "console": "internalConsole"
         },
     ]
 }
