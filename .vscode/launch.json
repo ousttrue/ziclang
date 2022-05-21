@@ -21,8 +21,8 @@
             "request": "launch",
             "program": "${workspaceFolder}/zig-out/bin/ziclang",
             "args": [
-                "-IC:\\Program Files\\LLVM\\include",
-                "clang-c/Include.h",
+                "C:/Program Files/LLVM/include/clang-c/Index.h",
+                "-IC:/Program Files/LLVM/include",
             ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
