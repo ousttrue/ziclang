@@ -13,7 +13,7 @@ const SOURCE =
 ;
 
 fn callback(cursor: libclang.CXCursor, _: libclang.CXCursor, _: libclang.CXClientData) callconv(.C) libclang.CXChildVisitResult {
-    const cxstr  = libclang.clang_getCursorKindSpelling(libclang.clang_getCursorKind(cursor));
+    const cxstr = libclang.clang_getCursorKindSpelling(libclang.clang_getCursorKind(cursor));
     defer libclang.clang_disposeString(cxstr);
     const str = libclang.clang_getCString(cxstr);
     // @compileLog(@TypeOf(str));
@@ -22,8 +22,22 @@ fn callback(cursor: libclang.CXCursor, _: libclang.CXCursor, _: libclang.CXClien
 }
 
 pub fn main() anyerror!void {
-    std.log.info("All your codebase are belong to us.", .{});
+    // args
+    const test_allocator = std.testing.allocator;
+    var args = try std.process.argsWithAllocator(test_allocator);
+    defer args.deinit();
 
+    var i: i32 = 0;
+    while (true) {
+        if (args.next()) |arg| {
+            std.debug.print("[{}]{s}\n", .{ i, arg });
+            i += 1;
+        } else {
+            break;
+        }
+    }
+
+    // get_tu
     const index = libclang.clang_createIndex(0, 0);
     defer libclang.clang_disposeIndex(index);
 

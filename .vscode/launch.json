@@ -20,7 +20,10 @@
             "type": "cppvsdbg",
             "request": "launch",
             "program": "${workspaceFolder}/zig-out/bin/ziclang",
-            "args": [],
+            "args": [
+                "-IC:\\Program Files\\LLVM\\include",
+                "clang-c/Include.h",
+            ],
             "stopAtEntry": false,
             "cwd": "${fileDirname}",
             "environment": [
