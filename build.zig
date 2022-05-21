@@ -16,7 +16,7 @@ pub fn build(b: *std.build.Builder) void {
     exe.setBuildMode(mode);
 
     exe.linkLibC();
-    std.debug.print("{}\n", .{exe.target_info});    
+    // std.debug.print("{}\n", .{exe.target_info});    
 
     if (exe.target_info.target.os.tag == std.Target.Os.Tag.windows) {
         exe.addIncludePath("C:/Program Files/LLVM/include");
