@@ -4,6 +4,13 @@ const libclang = @cImport({
     @cInclude("clang-c/Index.h");
 });
 
+const SOURCE = 
+\\int main()
+\\{
+\\  return 0;
+\\}
+;
+
 pub fn main() anyerror!void {
     std.log.info("All your codebase are belong to us.", .{});
 
@@ -13,13 +20,19 @@ pub fn main() anyerror!void {
     const source_name = "tmp.cpp";
     const command_line = [_] [] const u8{};
     const flags = 0;
-    const unsaved_files = [_]libclang.CXUnsavedFile{};
+    var unsaved_files = [_]libclang.CXUnsavedFile{
+        libclang.CXUnsavedFile{
+            .Filename=source_name,
+            .Contents= SOURCE,
+            .Length= SOURCE.len,
+        }
+    };
     const tu = libclang.clang_parseTranslationUnit(index, source_name, 
         //command_line, 
         null,
         command_line.len, 
         // unsaved_files, 
-        null,
+        &unsaved_files[0],
         unsaved_files.len, flags);
     defer libclang.clang_disposeTranslationUnit(tu);
 }
